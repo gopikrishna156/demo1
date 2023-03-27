@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+   body{
+      background-size: 100% 100vh;
+      display: flex;
+      justify-content: center;
+      cursor: default;
+   }
+   #Time{
+      font-size: 15vw;
+      position: absolute;
+      bottom: 35vh;
+      color: rgb(242, 255, 101);
+      text-shadow: 5px 5px 5px black;
+      font-family:'Pacifico', cursive;
+   }
+   #Date{
+      font-size: 10vw;
+      position: absolute;
+      bottom: 10vh;
+      color:white;
+      text-shadow: 5px 5px 5px black;
+      font-family:'Pacifico', cursive;
+   }
+   #Day{
+      font-size: 10vw;
+      position: absolute;
+      bottom: -15vh;
+      color: royalblue;
+      text-shadow: 5px 5px 5px black;
+      font-family:'Pacifico', cursive;
+   }
+   #Sec{
+      font-size: 40vw;
+      position: absolute;
+      top: -82vh;
+      z-index: -1;
+      color: rgb(164, 0, 0);
+      text-shadow: 5px 5px 5px black;
+      font-family:'Pacifico', cursive;
+   }
+   #Greet{
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.899);
+      position: fixed;
+      z-index: 3;
+      top: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 5vw;
+      letter-spacing: 10px;
+      word-spacing: 20px;
+      text-shadow: 5px 5px 5px black
+   }
+   #close{
+      position: absolute;
+      top: 40px;
+      right: 50px;
+      background-color: transparent;
+      border: none;
+      font-size: 40px;
+      color: white;
+      transition: rotate 0.2s;
+      cursor: pointer;
+   }
+   #close:hover{
+      rotate: 360deg;
+   }
+</style>
+</head>
+<body id="backgroundImg" onload="greet()">
+   <div id="Greet">
+      <button onclick="nogreet()" id="close">X</button>
+      <h1 id="GreetMessage"></h1>
+   </div>
+   <h1 id="Time"></h1>
+   <h1 id="Date"></h1>
+   <h1 id="Day"></h1>
+   <h1 id="Sec"></h1>
+    <script>
+      function nogreet()
+      {
+         document.getElementById("Greet").setAttribute("style","display:none")
+      }
+      function greet()
+      {
+         var date=new Date();
+         var hh=date.getHours();
+         if(hh>=6&&hh<12)
+         {
+            document.getElementById("GreetMessage").innerHTML="Good Morning"
+         }
+         else if(hh>=12 && hh<16)
+         {
+            document.getElementById("GreetMessage").innerHTML="Good Afternoon"  
+         }
+         else if(hh>=16 && hh<20)
+         {
+            document.getElementById("GreetMessage").innerHTML="Good Evening"  
+         }
+         else
+         {
+            document.getElementById("GreetMessage").innerHTML="Good Night"  
+         }
+         dateAndTime()
+      }
+      function  dateAndTime()
+      {
+       var date=new Date()
+       var hh=date.getHours();
+       var mm=date.getMinutes();
+       var ss=date.getSeconds();
+       var mo=date.getMonth();
+       var dt=date.getDate();
+       var yy=date.getFullYear();
+       var day=date.getDay();
+       var am_pm="AM"
+       if(hh>=12)
+       {
+          am_pm="pm"
+          if(hh>=13)
+          {
+             hh-=12;
+          }
+       }
+       if(mo==0)
+       {
+        mo="Jan"
+       }
+       else if(mo==1)
+       {
+        mo="Feb"
+       }
+       else if(mo==2)
+       {
+        mo="Mar"
+       }
+       else if(mo==3)
+       {
+        mo="Apr"
+       }
+       else if(mo==4)
+       {
+        mo="May"
+       }
+       else if(mo==5)
+       {
+        mo="Jun"
+       }
+       else if(mo==6)
+       {
+        mo="Jul"
+       }
+       else if(mo==7)
+       {
+        mo="Aug"
+       }
+       else if(mo==8)
+       {
+        mo="Sep"
+       }
+       else if(mo==9)
+       {
+        mo="Oct"
+       }
+       else if(mo==10)
+       {
+        mo="Nov"
+       }
+       else
+       {
+        mo="Dec"
+       }
+       switch(day)
+       {
+        case 0:
+            day="SUNDAY"
+            document.getElementById("backgroundImg").style.backgroundImage="url(./clockimage/Sun.jpg)"
+            break;
+         case 1:
+            day="MONDAY"
+            document.getElementById("backgroundImg").style.backgroundImage="url(./clockimage/Mon.jpg)"
+            break; 
+         case 2:
+            day="TUESDAY"
+            document.getElementById("backgroundImg").style.backgroundImage="url(./clockimage/Tue.jpg)"
+            break;   
+         case 3:
+            day="WEDNESDAY"
+            document.getElementById("backgroundImg").style.backgroundImage="url(./clockimage/Wed.jpg)"
+            break;
+         case 4:
+            day="THURSDAY"
+            document.getElementById("backgroundImg").style.backgroundImage="url(./clockimage/Thu.jpg)"
+            break;
+         case 5:
+            day="FRIDAY"
+            document.getElementById("backgroundImg").style.backgroundImage="url(./clockimage/Fri.jpg)"
+            break;
+         case 6:
+            day="SATURDAY"
+            document.getElementById("backgroundImg").style.backgroundImage="url(./clockimage/Sat.jpg)"
+            break; 
+       }
+            var totalTime=hh+":"+mm+" "+am_pm
+            document.getElementById("Time").innerHTML=totalTime;
+            var totalDate=dt+"/"+mo+"/"+yy
+            document.getElementById("Date").innerHTML=totalDate;
+            document.getElementById("Sec").innerHTML=ss;
+            document.getElementById("Day").innerHTML=day;
+            console.log(hh,mm,ss,mo,dt,yy,day)
+            var update=setTimeout(function(){dateAndTime()},1000)
+       }
+        var closetheclose=setTimeout(notgreet,5000)
+    </script>
+</body>
+</html>
